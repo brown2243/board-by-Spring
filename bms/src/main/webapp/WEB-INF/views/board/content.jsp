@@ -67,8 +67,11 @@
 					</div>
 					
 					<div class="form-group text-center">
+					<c:if test="${sessionScope.USERID_SESSION eq item.reg_userid}">
 						<button type="submit" id="write-submit"
 						 	 	class="btn btn-primary">수정</button>
+						<a type="button" class="btn btn-danger" href="/board/delete?id=${item.brd_id}">삭제</a>
+					</c:if>
 						<a type="button" class="btn btn-warning" href="/home">취소</a>
 					</div>
 				</form>

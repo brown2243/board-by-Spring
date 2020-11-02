@@ -14,17 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lanhan20.bms.entity.Board;
 import com.lanhan20.bms.entity.Notice;
-import com.lanhan20.bms.mapper.BoardMapper;
 import com.lanhan20.bms.mapper.NoticeMapper;
 
 @Controller
-@RequestMapping(value = "/board")
-public class BoardController {
-	
-	@Autowired
-	BoardMapper boardMapper;
+@RequestMapping(value = "/notice")
+public class NoticeController {
 	
 	@Autowired
 	NoticeMapper noticeMapper;
@@ -33,28 +28,23 @@ public class BoardController {
 	public String list(HttpServletRequest request, HttpSession httpSession,
 						Model model) {
 		
-		List<Board> list = boardMapper.getList();
-		List<Notice> noticelist = noticeMapper.getList();
+		List<Notice> list = noticeMapper.getList();
 		
 		model.addAttribute("list", list);
-		model.addAttribute("noticelist", noticelist);
-		return "/board/list"; // board_list.jsp
+		return "/notice/list"; // notice_list.jsp
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write() {
-		return "/board/write";
+		return "/notice/write";
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String list(HttpServletRequest request, HttpSession httpSession,
-			@ModelAttribute Board item,
-			@ModelAttribute Notice noticeitem) throws IOException {
+			@ModelAttribute Notice item) throws IOException {
 		System.out.println(item);
-		boardMapper.setBoard(item);
-		noticeMapper.setNotice(noticeitem);
-		
-		return "redirect:"+ request.getContextPath() + "/board/list";
+		noticeMapper.setNotice(item);
+		return "redirect:"+ request.getContextPath() + "/notice/list";
 	}
 	
 	@RequestMapping(value = "/content", method = RequestMethod.GET)
@@ -62,23 +52,23 @@ public class BoardController {
 			Model model, @RequestParam(value = "id", defaultValue = "0") Long id){
 		
 		if (id == 0) {
-			return "redirect:"+ request.getContextPath() + "/board/list";
+			return "redirect:"+ request.getContextPath() + "/notice/list";
 		}
-		boardMapper.updateBoardHit(id);
-		Board item = boardMapper.getBoard(id);
+		Notice item = noticeMapper.getNotice(id);
 		model.addAttribute("item", item);
-		return "/board/content"; // board_list.jsp
+		return "/notice/content"; // notice_list.jsp
 		
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(HttpServletRequest request, HttpSession httpSession,
-			@ModelAttribute Board item) throws IOException {
+			@ModelAttribute Notice item,
+			@RequestParam(value = "modi") String modi) throws IOException {
 		
 		System.out.println(item);
 		try {
-			boardMapper.setUpdateBoard(item);
-			return "redirect:"+ request.getContextPath() + "/board/list";
+			noticeMapper.setUpdateNotice(item, modi);
+			return "redirect:"+ request.getContextPath() + "/notice/list";
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -91,10 +81,10 @@ public class BoardController {
 	public String delete(HttpServletRequest request, HttpSession httpSession,
 			 @RequestParam(value = "id", defaultValue = "0") Long id){
 		
-		Integer ret = boardMapper.delBoard(id);
+		Integer ret = noticeMapper.delNotice(id);
 		
 		if (ret == 1) {
-			return "redirect:"+ request.getContextPath() + "/board/list";
+			return "redirect:"+ request.getContextPath() + "/notice/list";
 		} else {
 			return null;
 		}

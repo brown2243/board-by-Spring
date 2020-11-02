@@ -19,7 +19,7 @@
 </head>
 <body>
 	<header></header>
-	<nav class="navbar navbar-expane-lg bg-light">
+		<nav class="navbar navbar-expane-lg bg-light">
 		<a href="/home">BMS</a>
 		<a href="/notice/list">공지사항 게시판</a><a href="/board/list">일반 게시판</a>
 		<div class="navbar-nav">
@@ -28,7 +28,7 @@
 			</ul>
 		</div>
 	</nav>
-	<div></div>
+		<div></div>
 	<section>
 		<article>
 			<div class="container text-center">
@@ -44,33 +44,23 @@
 							<th>글번호</th>
 							<th>글제목</th>
 							<th>작성자</th>
-							<th>조회수</th>
+							<th>공지사항여부</th>
 							<th>날짜</th>
 						</tr>
-						<c:forEach var = "noticeitem" items = "${noticelist}">
-							<tr>
-								<td>${noticeitem.id}</td>
-								<td><a href="/notice/content?id=${noticeitem.id}">${noticeitem.title}</a></td>
-								<td>${noticeitem.created_by}</td>
-								<td>공지여부 ${noticeitem.notice_yn}</td>
-								<td>${noticeitem.created_at}</td>
-							</tr>
-						</c:forEach>
 						<c:forEach var="item" items="${list}">
 							<tr>
-								<td>${item.brd_id}</td>
-								<td><a href="/board/content?id=${item.brd_id}">${item.brd_title}</a></td>
-								<td>${item.reg_userid}</td>
-								<td>${item.hit}</td>
-								<td>${item.reg_date}</td>
+								<td>${item.id}</td>
+								<td><a href="/notice/content?id=${item.id}">${item.title}</a></td>
+								<td>${item.created_by}</td>
+								<td>${item.notice_yn}</td>
+								<td>${item.created_at}</td>
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
 				<div id="paging"></div>
 				<div id="write_button" class="text-right">
-					<a type="button" class="btn btn-warning" href="/notice/write">공지사항쓰기</a>
-					<a type="button" class="btn btn-primary" href="/board/write">글쓰기</a>
+					<a type="button" class="btn btn-primary" href="/notice/write">공지사항쓰기</a>
 				</div>
 			</div>
 		</article>

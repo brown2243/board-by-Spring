@@ -74,7 +74,7 @@ $(document).ready(function(){
 						</div>
 						
 						<div class="form-group">
-							<label for="userphone">비밀번호</label>
+							<label for="userphone">휴대폰번호</label>
 							<input class="form-control" type="text" id="userphone" 
 								   name="userphone" placeholder="휴대폰번호를 입력하시오">
 						</div>
@@ -85,7 +85,26 @@ $(document).ready(function(){
 					</form>
 					<script>
 						$(function(){
-							$("input").keyup(function(){
+							$("input[name=userid]").bind("keyup", function(event){
+								var userid = $(this).val();
+								if(userid.length > 0){
+									$.post("/rest/memberuseridcheck.json", {userid:userid}, function(result){
+											if(result.dup == 0){
+												$("#userid_dup").hide()
+												$("#userid_uniq").show()
+												$("#join-submit").attr("disabled", "disabled")
+											} else {
+												$("#userid_dup").show()
+												$("#userid_uniq").hide()
+												$("#join-submit").removeAttr("disabled", "disabled")
+											}
+										}, 'json');
+									} else {
+										$("#userid_dup").hide()
+										$("#userid_uniq").hide()
+									}
+								});
+								$("input").keyup(function(){
 									var pw1 = $("#userpw").val();
 									var pw2 = $("#userpwChk").val();
 
