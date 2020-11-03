@@ -14,7 +14,7 @@ import com.lanhan20.bms.entity.Board;
 @Mapper
 public interface BoardMapper {
 
-	@Select({"SELECT * FROM BOARD"})
+	@Select({"SELECT * FROM BOARD ORDER BY brd_id DESC"})
 	public List<Board> getList();
 	
 	@Select({"SELECT * FROM BOARD WHERE brd_id = #{id}"})

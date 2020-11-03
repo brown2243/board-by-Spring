@@ -46,9 +46,11 @@
 						<input type="text" class="form-control" id="created_by" name="created_by" 
 							   value="${sessionScope.USERID_SESSION}" readonly />
 					</div>
-					
-					<input type="hidden" class="form-control" id="notice_yn" name="notice_yn" value="Y"/>
-					
+					<div class="form-group text-left">
+					공지여부
+					Y <input type="radio" id="notice_yn" name="notice_yn" value="Y">
+					N <input type="radio" id="notice_yn" name="notice_yn" value="N">
+					</div>
 					<div class="form-group text-center">
 						<button type="submit" id="write-submit"
 						 	 	class="btn btn-primary">저장</button>

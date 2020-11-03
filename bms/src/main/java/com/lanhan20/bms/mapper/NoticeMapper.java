@@ -13,8 +13,8 @@ import com.lanhan20.bms.entity.Notice;
 
 @Mapper
 public interface NoticeMapper {
-
-	@Select({"SELECT * FROM Notice"})
+	
+	@Select({"SELECT * FROM Notice ORDER BY id DESC"})
 	public List<Notice> getList();
 	
 	@Select({"SELECT * FROM Notice WHERE id = #{id}"})

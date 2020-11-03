@@ -38,6 +38,28 @@
 						placeholder="검색어 입력하시오" /> <input type="submit"
 						class="btn btn-primary" value="검색" />
 				</form>
+					<div id="board-main">
+					<table class="table table-hover">
+						<tr>
+							<th>공지번호</th>
+							<th>공지제목</th>
+							<th>작성자</th>
+							<th>전체공지여부</th>
+							<th>날짜</th>
+						</tr>
+						<c:forEach var = "noticeitem" items = "${noticelist}">
+							<c:if test="${noticeitem.notice_yn eq 'Y'}">
+								<tr>
+									<td>${noticeitem.id}</td>
+									<td><a href="/notice/content?id=${noticeitem.id}">${noticeitem.title}</a></td>
+									<td>${noticeitem.created_by}</td>
+									<td>공지여부 ${noticeitem.notice_yn}</td>
+									<td>${noticeitem.created_at}</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</table>
+				</div>
 				<div id="board-main">
 					<table class="table table-hover">
 						<tr>
@@ -47,15 +69,6 @@
 							<th>조회수</th>
 							<th>날짜</th>
 						</tr>
-						<c:forEach var = "noticeitem" items = "${noticelist}">
-							<tr>
-								<td>${noticeitem.id}</td>
-								<td><a href="/notice/content?id=${noticeitem.id}">${noticeitem.title}</a></td>
-								<td>${noticeitem.created_by}</td>
-								<td>공지여부 ${noticeitem.notice_yn}</td>
-								<td>${noticeitem.created_at}</td>
-							</tr>
-						</c:forEach>
 						<c:forEach var="item" items="${list}">
 							<tr>
 								<td>${item.brd_id}</td>

@@ -47,7 +47,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String list(HttpServletRequest request, HttpSession httpSession,
+	public String write(HttpServletRequest request, HttpSession httpSession,
 			@ModelAttribute Board item,
 			@ModelAttribute Notice noticeitem) throws IOException {
 		System.out.println(item);

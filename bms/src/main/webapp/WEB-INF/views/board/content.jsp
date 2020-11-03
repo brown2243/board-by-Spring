@@ -52,7 +52,8 @@
 					<div class="form-group">
 						<label for ="reg_date">작성일</label>
 						<input type="text" class="form-control" id="reg_date" name="reg_date" 
-							   value="${item.reg_date}" readonly />
+							   value="${item.reg_date}" readonly /> 
+							   <!--  "${item.reg_date.toString().replace("T"," ")}" datetimeformat 사용할 때  --> 
 					</div>
 					
 					<div class="form-group">
